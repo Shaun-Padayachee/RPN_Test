@@ -1,0 +1,42 @@
+﻿@model rpnTest.Models.Labour_SOW
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Labour_SOW</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lab_hrs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lab_hrs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Labour.lab_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Labour.lab_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scope_of_Work.sow_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scope_of_Work.sow_desc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.lab_sow_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

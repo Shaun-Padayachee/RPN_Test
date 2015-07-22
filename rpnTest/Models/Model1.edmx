@@ -1,0 +1,777 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="rpnTestDB130715Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="adr_id" />
+          </Key>
+          <Property Name="adr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adr_line_1" Type="varchar(max)" />
+          <Property Name="adr_line_2" Type="varchar(max)" />
+          <Property Name="adr_city" Type="varchar(max)" />
+          <Property Name="post_code" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_name" Type="varchar(max)" />
+          <Property Name="client_contact_no" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Client_Address">
+          <Key>
+            <PropertyRef Name="cli_adr_id" />
+          </Key>
+          <Property Name="cli_adr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adr_id" Type="int" />
+          <Property Name="client_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Labour">
+          <Key>
+            <PropertyRef Name="lab_id" />
+          </Key>
+          <Property Name="lab_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lab_desc" Type="varchar(max)" />
+          <Property Name="lab_rate" Type="money" />
+        </EntityType>
+        <EntityType Name="Labour_SOW">
+          <Key>
+            <PropertyRef Name="lab_sow_id" />
+          </Key>
+          <Property Name="lab_sow_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sow_id" Type="int" />
+          <Property Name="lab_id" Type="int" />
+          <Property Name="lab_hrs" Type="int" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="mat_id" />
+          </Key>
+          <Property Name="mat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mat_desc" Type="varchar(max)" />
+          <Property Name="mat_cost_price" Type="money" />
+          <Property Name="mat_mu_price" Type="money" />
+        </EntityType>
+        <EntityType Name="Material_SOW">
+          <Key>
+            <PropertyRef Name="mat_sow_id" />
+          </Key>
+          <Property Name="mat_sow_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sow_id" Type="int" />
+          <Property Name="mat_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Order_Item">
+          <Key>
+            <PropertyRef Name="order_item_id" />
+          </Key>
+          <Property Name="order_item_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_no" Type="int" />
+          <Property Name="mat_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="order_no" />
+          </Key>
+          <Property Name="order_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Quotation">
+          <Key>
+            <PropertyRef Name="quote_no" />
+          </Key>
+          <Property Name="quote_no" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="quote_date" Type="date" />
+          <Property Name="person" Type="varchar(max)" />
+          <Property Name="descript" Type="varchar(max)" />
+          <Property Name="price_ex_vat" Type="money" />
+          <Property Name="set_1" Type="varchar(max)" />
+          <Property Name="set_2" Type="varchar(max)" />
+          <Property Name="set_3" Type="varchar(max)" />
+          <Property Name="set_4" Type="varchar(max)" />
+          <Property Name="set_5" Type="varchar(max)" />
+          <Property Name="set_6" Type="varchar(max)" />
+          <Property Name="client_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Quote_SOW">
+          <Key>
+            <PropertyRef Name="quote_sow_id" />
+          </Key>
+          <Property Name="quote_sow_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sow_id" Type="int" />
+          <Property Name="quote_no" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Scope_of_Work">
+          <Key>
+            <PropertyRef Name="sow_id" />
+          </Key>
+          <Property Name="sow_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sow_desc" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__Client_Ad__adr_i__145C0A3F">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Client_Address" Type="Self.Client_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="adr_id" />
+            </Principal>
+            <Dependent Role="Client_Address">
+              <PropertyRef Name="adr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Client_Ad__clien__15502E78">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Client_Address" Type="Self.Client_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Client_Address">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Labour_SO__lab_i__29572725">
+          <End Role="Labour" Type="Self.Labour" Multiplicity="0..1" />
+          <End Role="Labour_SOW" Type="Self.Labour_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Labour">
+              <PropertyRef Name="lab_id" />
+            </Principal>
+            <Dependent Role="Labour_SOW">
+              <PropertyRef Name="lab_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Labour_SO__sow_i__286302EC">
+          <End Role="Scope_of_Work" Type="Self.Scope_of_Work" Multiplicity="0..1" />
+          <End Role="Labour_SOW" Type="Self.Labour_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scope_of_Work">
+              <PropertyRef Name="sow_id" />
+            </Principal>
+            <Dependent Role="Labour_SOW">
+              <PropertyRef Name="sow_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Material___mat_i__25869641">
+          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+          <End Role="Material_SOW" Type="Self.Material_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="mat_id" />
+            </Principal>
+            <Dependent Role="Material_SOW">
+              <PropertyRef Name="mat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Material___sow_i__24927208">
+          <End Role="Scope_of_Work" Type="Self.Scope_of_Work" Multiplicity="0..1" />
+          <End Role="Material_SOW" Type="Self.Material_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scope_of_Work">
+              <PropertyRef Name="sow_id" />
+            </Principal>
+            <Dependent Role="Material_SOW">
+              <PropertyRef Name="sow_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Ite__mat_i__2F10007B">
+          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+          <End Role="Order_Item" Type="Self.Order_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="mat_id" />
+            </Principal>
+            <Dependent Role="Order_Item">
+              <PropertyRef Name="mat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Ite__order__2E1BDC42">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Order_Item" Type="Self.Order_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="order_no" />
+            </Principal>
+            <Dependent Role="Order_Item">
+              <PropertyRef Name="order_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quotation__clien__1DE57479">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Quotation">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quote_SOW__quote__21B6055D">
+          <End Role="Quotation" Type="Self.Quotation" Multiplicity="0..1" />
+          <End Role="Quote_SOW" Type="Self.Quote_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quotation">
+              <PropertyRef Name="quote_no" />
+            </Principal>
+            <Dependent Role="Quote_SOW">
+              <PropertyRef Name="quote_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quote_SOW__sow_i__20C1E124">
+          <End Role="Scope_of_Work" Type="Self.Scope_of_Work" Multiplicity="0..1" />
+          <End Role="Quote_SOW" Type="Self.Quote_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scope_of_Work">
+              <PropertyRef Name="sow_id" />
+            </Principal>
+            <Dependent Role="Quote_SOW">
+              <PropertyRef Name="sow_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="rpnTestDB130715ModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client_Address" EntityType="Self.Client_Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Labour" EntityType="Self.Labour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Labour_SOW" EntityType="Self.Labour_SOW" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material_SOW" EntityType="Self.Material_SOW" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Item" EntityType="Self.Order_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quotation" EntityType="Self.Quotation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quote_SOW" EntityType="Self.Quote_SOW" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scope_of_Work" EntityType="Self.Scope_of_Work" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Client_Ad__adr_i__145C0A3F" Association="Self.FK__Client_Ad__adr_i__145C0A3F">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Client_Address" EntitySet="Client_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Client_Ad__clien__15502E78" Association="Self.FK__Client_Ad__clien__15502E78">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Client_Address" EntitySet="Client_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Labour_SO__lab_i__29572725" Association="Self.FK__Labour_SO__lab_i__29572725">
+            <End Role="Labour" EntitySet="Labour" />
+            <End Role="Labour_SOW" EntitySet="Labour_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Labour_SO__sow_i__286302EC" Association="Self.FK__Labour_SO__sow_i__286302EC">
+            <End Role="Scope_of_Work" EntitySet="Scope_of_Work" />
+            <End Role="Labour_SOW" EntitySet="Labour_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Material___mat_i__25869641" Association="Self.FK__Material___mat_i__25869641">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Material_SOW" EntitySet="Material_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Material___sow_i__24927208" Association="Self.FK__Material___sow_i__24927208">
+            <End Role="Scope_of_Work" EntitySet="Scope_of_Work" />
+            <End Role="Material_SOW" EntitySet="Material_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Ite__mat_i__2F10007B" Association="Self.FK__Order_Ite__mat_i__2F10007B">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Order_Item" EntitySet="Order_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Ite__order__2E1BDC42" Association="Self.FK__Order_Ite__order__2E1BDC42">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Order_Item" EntitySet="Order_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quotation__clien__1DE57479" Association="Self.FK__Quotation__clien__1DE57479">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Quotation" EntitySet="Quotation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quote_SOW__quote__21B6055D" Association="Self.FK__Quote_SOW__quote__21B6055D">
+            <End Role="Quotation" EntitySet="Quotation" />
+            <End Role="Quote_SOW" EntitySet="Quote_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quote_SOW__sow_i__20C1E124" Association="Self.FK__Quote_SOW__sow_i__20C1E124">
+            <End Role="Scope_of_Work" EntitySet="Scope_of_Work" />
+            <End Role="Quote_SOW" EntitySet="Quote_SOW" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rpnTestDB130715Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="adr_id" />
+          </Key>
+          <Property Name="adr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adr_line_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="adr_line_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="adr_city" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="post_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client_Address" Relationship="Self.FK__Client_Ad__adr_i__145C0A3F" FromRole="Address" ToRole="Client_Address" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="client_contact_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client_Address" Relationship="Self.FK__Client_Ad__clien__15502E78" FromRole="Client" ToRole="Client_Address" />
+          <NavigationProperty Name="Quotations" Relationship="Self.FK__Quotation__clien__1DE57479" FromRole="Client" ToRole="Quotation" />
+        </EntityType>
+        <EntityType Name="Client_Address">
+          <Key>
+            <PropertyRef Name="cli_adr_id" />
+          </Key>
+          <Property Name="cli_adr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adr_id" Type="Int32" />
+          <Property Name="client_id" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Client_Ad__adr_i__145C0A3F" FromRole="Client_Address" ToRole="Address" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Client_Ad__clien__15502E78" FromRole="Client_Address" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Labour">
+          <Key>
+            <PropertyRef Name="lab_id" />
+          </Key>
+          <Property Name="lab_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lab_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="lab_rate" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Labour_SOW" Relationship="Self.FK__Labour_SO__lab_i__29572725" FromRole="Labour" ToRole="Labour_SOW" />
+        </EntityType>
+        <EntityType Name="Labour_SOW">
+          <Key>
+            <PropertyRef Name="lab_sow_id" />
+          </Key>
+          <Property Name="lab_sow_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sow_id" Type="Int32" />
+          <Property Name="lab_id" Type="Int32" />
+          <Property Name="lab_hrs" Type="Int32" />
+          <NavigationProperty Name="Labour" Relationship="Self.FK__Labour_SO__lab_i__29572725" FromRole="Labour_SOW" ToRole="Labour" />
+          <NavigationProperty Name="Scope_of_Work" Relationship="Self.FK__Labour_SO__sow_i__286302EC" FromRole="Labour_SOW" ToRole="Scope_of_Work" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="mat_id" />
+          </Key>
+          <Property Name="mat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mat_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="mat_cost_price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="mat_mu_price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Material_SOW" Relationship="Self.FK__Material___mat_i__25869641" FromRole="Material" ToRole="Material_SOW" />
+          <NavigationProperty Name="Order_Item" Relationship="Self.FK__Order_Ite__mat_i__2F10007B" FromRole="Material" ToRole="Order_Item" />
+        </EntityType>
+        <EntityType Name="Material_SOW">
+          <Key>
+            <PropertyRef Name="mat_sow_id" />
+          </Key>
+          <Property Name="mat_sow_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sow_id" Type="Int32" />
+          <Property Name="mat_id" Type="Int32" />
+          <NavigationProperty Name="Material" Relationship="Self.FK__Material___mat_i__25869641" FromRole="Material_SOW" ToRole="Material" />
+          <NavigationProperty Name="Scope_of_Work" Relationship="Self.FK__Material___sow_i__24927208" FromRole="Material_SOW" ToRole="Scope_of_Work" />
+        </EntityType>
+        <EntityType Name="Order_Item">
+          <Key>
+            <PropertyRef Name="order_item_id" />
+          </Key>
+          <Property Name="order_item_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_no" Type="Int32" />
+          <Property Name="mat_id" Type="Int32" />
+          <NavigationProperty Name="Material" Relationship="Self.FK__Order_Ite__mat_i__2F10007B" FromRole="Order_Item" ToRole="Material" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order_Ite__order__2E1BDC42" FromRole="Order_Item" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="order_no" />
+          </Key>
+          <Property Name="order_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Order_Item" Relationship="Self.FK__Order_Ite__order__2E1BDC42" FromRole="Orders" ToRole="Order_Item" />
+        </EntityType>
+        <EntityType Name="Quotation">
+          <Key>
+            <PropertyRef Name="quote_no" />
+          </Key>
+          <Property Name="quote_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="quote_date" Type="DateTime" Precision="0" />
+          <Property Name="person" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="descript" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="price_ex_vat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="set_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="set_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="set_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="set_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="set_5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="set_6" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="client_id" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Quotation__clien__1DE57479" FromRole="Quotation" ToRole="Client" />
+          <NavigationProperty Name="Quote_SOW" Relationship="Self.FK__Quote_SOW__quote__21B6055D" FromRole="Quotation" ToRole="Quote_SOW" />
+        </EntityType>
+        <EntityType Name="Quote_SOW">
+          <Key>
+            <PropertyRef Name="quote_sow_id" />
+          </Key>
+          <Property Name="quote_sow_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sow_id" Type="Int32" />
+          <Property Name="quote_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Quotation" Relationship="Self.FK__Quote_SOW__quote__21B6055D" FromRole="Quote_SOW" ToRole="Quotation" />
+          <NavigationProperty Name="Scope_of_Work" Relationship="Self.FK__Quote_SOW__sow_i__20C1E124" FromRole="Quote_SOW" ToRole="Scope_of_Work" />
+        </EntityType>
+        <EntityType Name="Scope_of_Work">
+          <Key>
+            <PropertyRef Name="sow_id" />
+          </Key>
+          <Property Name="sow_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sow_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Labour_SOW" Relationship="Self.FK__Labour_SO__sow_i__286302EC" FromRole="Scope_of_Work" ToRole="Labour_SOW" />
+          <NavigationProperty Name="Material_SOW" Relationship="Self.FK__Material___sow_i__24927208" FromRole="Scope_of_Work" ToRole="Material_SOW" />
+          <NavigationProperty Name="Quote_SOW" Relationship="Self.FK__Quote_SOW__sow_i__20C1E124" FromRole="Scope_of_Work" ToRole="Quote_SOW" />
+        </EntityType>
+        <Association Name="FK__Client_Ad__adr_i__145C0A3F">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Client_Address" Type="Self.Client_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="adr_id" />
+            </Principal>
+            <Dependent Role="Client_Address">
+              <PropertyRef Name="adr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Client_Ad__clien__15502E78">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Client_Address" Type="Self.Client_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Client_Address">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quotation__clien__1DE57479">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Quotation" Type="Self.Quotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Quotation">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Labour_SO__lab_i__29572725">
+          <End Role="Labour" Type="Self.Labour" Multiplicity="0..1" />
+          <End Role="Labour_SOW" Type="Self.Labour_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Labour">
+              <PropertyRef Name="lab_id" />
+            </Principal>
+            <Dependent Role="Labour_SOW">
+              <PropertyRef Name="lab_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Labour_SO__sow_i__286302EC">
+          <End Role="Scope_of_Work" Type="Self.Scope_of_Work" Multiplicity="0..1" />
+          <End Role="Labour_SOW" Type="Self.Labour_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scope_of_Work">
+              <PropertyRef Name="sow_id" />
+            </Principal>
+            <Dependent Role="Labour_SOW">
+              <PropertyRef Name="sow_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Material___mat_i__25869641">
+          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+          <End Role="Material_SOW" Type="Self.Material_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="mat_id" />
+            </Principal>
+            <Dependent Role="Material_SOW">
+              <PropertyRef Name="mat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Ite__mat_i__2F10007B">
+          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+          <End Role="Order_Item" Type="Self.Order_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="mat_id" />
+            </Principal>
+            <Dependent Role="Order_Item">
+              <PropertyRef Name="mat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Material___sow_i__24927208">
+          <End Role="Scope_of_Work" Type="Self.Scope_of_Work" Multiplicity="0..1" />
+          <End Role="Material_SOW" Type="Self.Material_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scope_of_Work">
+              <PropertyRef Name="sow_id" />
+            </Principal>
+            <Dependent Role="Material_SOW">
+              <PropertyRef Name="sow_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Ite__order__2E1BDC42">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Order_Item" Type="Self.Order_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="order_no" />
+            </Principal>
+            <Dependent Role="Order_Item">
+              <PropertyRef Name="order_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quote_SOW__quote__21B6055D">
+          <End Role="Quotation" Type="Self.Quotation" Multiplicity="0..1" />
+          <End Role="Quote_SOW" Type="Self.Quote_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quotation">
+              <PropertyRef Name="quote_no" />
+            </Principal>
+            <Dependent Role="Quote_SOW">
+              <PropertyRef Name="quote_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quote_SOW__sow_i__20C1E124">
+          <End Role="Scope_of_Work" Type="Self.Scope_of_Work" Multiplicity="0..1" />
+          <End Role="Quote_SOW" Type="Self.Quote_SOW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scope_of_Work">
+              <PropertyRef Name="sow_id" />
+            </Principal>
+            <Dependent Role="Quote_SOW">
+              <PropertyRef Name="sow_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="rpnTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Client_Address" EntityType="Self.Client_Address" />
+          <EntitySet Name="Labours" EntityType="Self.Labour" />
+          <EntitySet Name="Labour_SOW" EntityType="Self.Labour_SOW" />
+          <EntitySet Name="Materials" EntityType="Self.Material" />
+          <EntitySet Name="Material_SOW" EntityType="Self.Material_SOW" />
+          <EntitySet Name="Order_Item" EntityType="Self.Order_Item" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Quotations" EntityType="Self.Quotation" />
+          <EntitySet Name="Quote_SOW" EntityType="Self.Quote_SOW" />
+          <EntitySet Name="Scope_of_Work" EntityType="Self.Scope_of_Work" />
+          <AssociationSet Name="FK__Client_Ad__adr_i__145C0A3F" Association="Self.FK__Client_Ad__adr_i__145C0A3F">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Client_Address" EntitySet="Client_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Client_Ad__clien__15502E78" Association="Self.FK__Client_Ad__clien__15502E78">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Client_Address" EntitySet="Client_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quotation__clien__1DE57479" Association="Self.FK__Quotation__clien__1DE57479">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Quotation" EntitySet="Quotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Labour_SO__lab_i__29572725" Association="Self.FK__Labour_SO__lab_i__29572725">
+            <End Role="Labour" EntitySet="Labours" />
+            <End Role="Labour_SOW" EntitySet="Labour_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Labour_SO__sow_i__286302EC" Association="Self.FK__Labour_SO__sow_i__286302EC">
+            <End Role="Scope_of_Work" EntitySet="Scope_of_Work" />
+            <End Role="Labour_SOW" EntitySet="Labour_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Material___mat_i__25869641" Association="Self.FK__Material___mat_i__25869641">
+            <End Role="Material" EntitySet="Materials" />
+            <End Role="Material_SOW" EntitySet="Material_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Ite__mat_i__2F10007B" Association="Self.FK__Order_Ite__mat_i__2F10007B">
+            <End Role="Material" EntitySet="Materials" />
+            <End Role="Order_Item" EntitySet="Order_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Material___sow_i__24927208" Association="Self.FK__Material___sow_i__24927208">
+            <End Role="Scope_of_Work" EntitySet="Scope_of_Work" />
+            <End Role="Material_SOW" EntitySet="Material_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Ite__order__2E1BDC42" Association="Self.FK__Order_Ite__order__2E1BDC42">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Order_Item" EntitySet="Order_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quote_SOW__quote__21B6055D" Association="Self.FK__Quote_SOW__quote__21B6055D">
+            <End Role="Quotation" EntitySet="Quotations" />
+            <End Role="Quote_SOW" EntitySet="Quote_SOW" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quote_SOW__sow_i__20C1E124" Association="Self.FK__Quote_SOW__sow_i__20C1E124">
+            <End Role="Scope_of_Work" EntitySet="Scope_of_Work" />
+            <End Role="Quote_SOW" EntitySet="Quote_SOW" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="rpnTestDB130715ModelStoreContainer" CdmEntityContainer="rpnTestEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="adr_id" ColumnName="adr_id" />
+                <ScalarProperty Name="adr_line_1" ColumnName="adr_line_1" />
+                <ScalarProperty Name="adr_line_2" ColumnName="adr_line_2" />
+                <ScalarProperty Name="adr_city" ColumnName="adr_city" />
+                <ScalarProperty Name="post_code" ColumnName="post_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="client_name" ColumnName="client_name" />
+                <ScalarProperty Name="client_contact_no" ColumnName="client_contact_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client_Address">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Client_Address">
+              <MappingFragment StoreEntitySet="Client_Address">
+                <ScalarProperty Name="cli_adr_id" ColumnName="cli_adr_id" />
+                <ScalarProperty Name="adr_id" ColumnName="adr_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Labours">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Labour">
+              <MappingFragment StoreEntitySet="Labour">
+                <ScalarProperty Name="lab_id" ColumnName="lab_id" />
+                <ScalarProperty Name="lab_desc" ColumnName="lab_desc" />
+                <ScalarProperty Name="lab_rate" ColumnName="lab_rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Labour_SOW">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Labour_SOW">
+              <MappingFragment StoreEntitySet="Labour_SOW">
+                <ScalarProperty Name="lab_sow_id" ColumnName="lab_sow_id" />
+                <ScalarProperty Name="sow_id" ColumnName="sow_id" />
+                <ScalarProperty Name="lab_id" ColumnName="lab_id" />
+                <ScalarProperty Name="lab_hrs" ColumnName="lab_hrs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="mat_id" ColumnName="mat_id" />
+                <ScalarProperty Name="mat_desc" ColumnName="mat_desc" />
+                <ScalarProperty Name="mat_cost_price" ColumnName="mat_cost_price" />
+                <ScalarProperty Name="mat_mu_price" ColumnName="mat_mu_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Material_SOW">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Material_SOW">
+              <MappingFragment StoreEntitySet="Material_SOW">
+                <ScalarProperty Name="mat_sow_id" ColumnName="mat_sow_id" />
+                <ScalarProperty Name="sow_id" ColumnName="sow_id" />
+                <ScalarProperty Name="mat_id" ColumnName="mat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Item">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Order_Item">
+              <MappingFragment StoreEntitySet="Order_Item">
+                <ScalarProperty Name="order_item_id" ColumnName="order_item_id" />
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+                <ScalarProperty Name="mat_id" ColumnName="mat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quotations">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Quotation">
+              <MappingFragment StoreEntitySet="Quotation">
+                <ScalarProperty Name="quote_no" ColumnName="quote_no" />
+                <ScalarProperty Name="quote_date" ColumnName="quote_date" />
+                <ScalarProperty Name="person" ColumnName="person" />
+                <ScalarProperty Name="descript" ColumnName="descript" />
+                <ScalarProperty Name="price_ex_vat" ColumnName="price_ex_vat" />
+                <ScalarProperty Name="set_1" ColumnName="set_1" />
+                <ScalarProperty Name="set_2" ColumnName="set_2" />
+                <ScalarProperty Name="set_3" ColumnName="set_3" />
+                <ScalarProperty Name="set_4" ColumnName="set_4" />
+                <ScalarProperty Name="set_5" ColumnName="set_5" />
+                <ScalarProperty Name="set_6" ColumnName="set_6" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quote_SOW">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Quote_SOW">
+              <MappingFragment StoreEntitySet="Quote_SOW">
+                <ScalarProperty Name="quote_sow_id" ColumnName="quote_sow_id" />
+                <ScalarProperty Name="sow_id" ColumnName="sow_id" />
+                <ScalarProperty Name="quote_no" ColumnName="quote_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scope_of_Work">
+            <EntityTypeMapping TypeName="rpnTestDB130715Model.Scope_of_Work">
+              <MappingFragment StoreEntitySet="Scope_of_Work">
+                <ScalarProperty Name="sow_id" ColumnName="sow_id" />
+                <ScalarProperty Name="sow_desc" ColumnName="sow_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

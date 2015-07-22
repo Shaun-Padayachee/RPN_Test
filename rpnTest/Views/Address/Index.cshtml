@@ -1,0 +1,51 @@
+﻿@model IEnumerable<rpnTest.Models.Address>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.adr_line_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adr_line_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adr_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.post_code)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.adr_line_1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adr_line_2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adr_city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.post_code)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.adr_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.adr_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.adr_id })
+        </td>
+    </tr>
+}
+
+</table>

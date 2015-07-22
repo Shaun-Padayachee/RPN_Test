@@ -1,0 +1,129 @@
+﻿@model rpnTest.Models.Quotation
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Quotation</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.quote_no, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.quote_no)
+                @Html.ValidationMessageFor(model => model.quote_no)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.quote_date, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.quote_date)
+                @Html.ValidationMessageFor(model => model.quote_date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.person, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.person)
+                @Html.ValidationMessageFor(model => model.person)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.descript, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descript)
+                @Html.ValidationMessageFor(model => model.descript)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price_ex_vat, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price_ex_vat)
+                @Html.ValidationMessageFor(model => model.price_ex_vat)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.set_1, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.set_1)
+                @Html.ValidationMessageFor(model => model.set_1)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.set_2, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.set_2)
+                @Html.ValidationMessageFor(model => model.set_2)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.set_3, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.set_3)
+                @Html.ValidationMessageFor(model => model.set_3)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.set_4, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.set_4)
+                @Html.ValidationMessageFor(model => model.set_4)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.set_5, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.set_5)
+                @Html.ValidationMessageFor(model => model.set_5)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.set_6, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.set_6)
+                @Html.ValidationMessageFor(model => model.set_6)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.client_id, "client_id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("client_id", String.Empty)
+                @Html.ValidationMessageFor(model => model.client_id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

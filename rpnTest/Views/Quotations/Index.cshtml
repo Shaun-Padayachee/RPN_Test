@@ -1,0 +1,95 @@
+﻿@model IEnumerable<rpnTest.Models.Quotation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.quote_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.person)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descript)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price_ex_vat)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.set_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.set_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.set_3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.set_4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.set_5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.set_6)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Client.client_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.quote_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.person)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descript)
+        </td>
+       <td>
+            @Html.DisplayFor(modelItem => item.price_ex_vat)
+        </td>
+      @*  <td>
+        @Html.DisplayFor(modelItem => item.set_1)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.set_2)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.set_3)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.set_4)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.set_5)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.set_6)
+    </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.client_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.quote_no }) |
+            @Html.ActionLink("Details", "Details", new { id=item.quote_no }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.quote_no }) |
+            @Html.ActionLink("Scope of Work", "getSOW", "ScopeOfWork", new { id = item.quote_no }, null) |
+            @Html.ActionLink("View Orders", "GetOrdersForQuote", "Orders", new { id = item.quote_no }, null)
+        </td>
+    </tr>
+}
+
+</table>

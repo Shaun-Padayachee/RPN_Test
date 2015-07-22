@@ -1,0 +1,39 @@
+﻿@model IEnumerable<rpnTest.Models.Labour>
+
+@{
+    ViewBag.Title = "GetLabour";
+}
+
+<h2>GetLabour</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.lab_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lab_rate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.lab_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lab_rate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.lab_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.lab_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.lab_id })
+        </td>
+    </tr>
+}
+
+</table>

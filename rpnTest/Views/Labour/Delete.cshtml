@@ -1,0 +1,48 @@
+﻿@model rpnTest.Models.Labour_SOW
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Labour_SOW</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lab_hrs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lab_hrs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Labour.lab_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Labour.lab_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scope_of_Work.sow_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scope_of_Work.sow_desc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

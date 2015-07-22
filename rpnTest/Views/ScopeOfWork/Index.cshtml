@@ -1,0 +1,33 @@
+﻿@model IEnumerable<rpnTest.Models.Scope_of_Work>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sow_desc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sow_desc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.sow_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.sow_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.sow_id })
+        </td>
+    </tr>
+}
+
+</table>

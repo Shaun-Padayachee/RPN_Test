@@ -1,0 +1,50 @@
+﻿@model rpnTest.Models.Address
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Address</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.adr_line_1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adr_line_1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adr_line_2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adr_line_2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adr_city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adr_city)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_code)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.adr_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

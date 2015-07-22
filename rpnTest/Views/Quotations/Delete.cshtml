@@ -1,0 +1,112 @@
+﻿@model rpnTest.Models.Quotation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Quotation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.quote_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quote_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.person)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.person)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descript)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descript)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price_ex_vat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price_ex_vat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.set_1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.set_1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.set_2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.set_2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.set_3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.set_3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.set_4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.set_4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.set_5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.set_5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.set_6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.set_6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.client_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.client_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
